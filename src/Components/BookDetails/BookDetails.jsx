@@ -1,5 +1,11 @@
 import { useLoaderData, useParams } from "react-router-dom"
+import { addToStoredReadList } from "../utilities/AddToDb";
+import { addToTheWishList } from "../utilities/AddToWishListDb";
 const BookDetails = () => {
+
+
+
+
     const {bookId} = useParams();
 
     const id = parseInt(bookId)
@@ -8,6 +14,16 @@ const BookDetails = () => {
     const book = books.find(book => book.bookId === id)
 
     const {image, bookName, author, category, review, rating, tags, publisher, yearOfPublishing, totalPages,} = book;
+
+
+    const handleMarkAsRead = (id) => {
+        addToStoredReadList(id);
+    }
+
+    const handleAddToWishList = (id) => {
+        addToTheWishList(id)
+    }
+
   return (
     <div className="my-9 flex gap-10 justify-center">
         <div className=" bg-[#F3F3F3] rounded-2xl p-20">
@@ -49,8 +65,8 @@ const BookDetails = () => {
             </div>
         </div>
         <div className="flex gap-3 mt-6 font-bold">
-            <button className="border text-[#131313] p-5">Read</button>
-            <button className="border text-white bg-[#50B1C9] p-5">Wishlist</button>
+            <button onClick={()=> handleMarkAsRead(bookId)} className="border text-[#131313] p-5">Read</button>
+            <button onClick={()=> handleAddToWishList(bookId)} className="border text-white bg-[#50B1C9] p-5">Wishlist</button>
         </div>
         </div>
     </div>
