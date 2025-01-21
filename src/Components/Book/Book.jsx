@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
 
 const Book = ({book}) => {
-    const {image, bookName, author, category, rating} = book;
+    const {bookId ,image, bookName, author, category, rating, tags} = book;
   return (
+    <Link to={`/books/${bookId}`}>
     <div className="card bg-base-100 w-96 shadow-xl border p-4">
     <figure className="bg-[#F3F3F3] py-6">
       <img
@@ -11,10 +13,10 @@ const Book = ({book}) => {
     </figure>
     <div className=" py-6">
       <div className="flex gap-6"> 
-        <h1 className=" py-1 bg-[#F3F3F3] text-[#23BE0A] text-sm px-4 font-bold rounded-xl">young</h1>
-        <h1 className=" py-1 bg-[#F3F3F3] text-[#23BE0A] text-sm px-4 font-bold rounded-xl">Identity</h1>
+        <h1 className=" py-1 bg-[#F3F3F3] text-[#23BE0A] text-sm px-4 font-bold rounded-xl">{tags[0]}</h1>
+        <h1 className=" py-1 bg-[#F3F3F3] text-[#23BE0A] text-sm px-4 font-bold rounded-xl">{tags[1]}</h1>
       </div>
-      <div className="border my-4">
+      <div className=" my-4">
         <h1 className="text-[#131313] text-2xl font-bold">{bookName}</h1>
         <p className="text-base text-[#131313CC] mt-3"> By :  {author}</p>
       </div>
@@ -31,6 +33,7 @@ const Book = ({book}) => {
 
     </div>
   </div>
+    </Link>
   )
 }
 
