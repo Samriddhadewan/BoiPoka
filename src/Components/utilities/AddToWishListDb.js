@@ -19,4 +19,4 @@ const addToTheWishList = (id) =>{
         localStorage.setItem("wish-list", wishListStr)
     }
 }
-export {addToTheWishList};
+export {addToTheWishList, getStoredWishList};
