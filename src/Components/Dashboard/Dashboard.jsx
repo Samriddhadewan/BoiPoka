@@ -4,8 +4,12 @@ import "react-tabs/style/react-tabs.css";
 import { getStoredWishList } from "../utilities/AddToWishListDb";
 import { useEffect, useState } from "react";
 import ListedBook from "../ListedBook/ListedBook";
+import { getStoredReadList } from "../utilities/AddToDb";
 const Dashboard = () => {
   const [wishList, setWishList] = useState([]);
+  const [readList, setReadList] = useState([])
+
+
   const allBooks = useLoaderData();
   useEffect(() => {
     const wishList = getStoredWishList();
@@ -17,7 +21,19 @@ const Dashboard = () => {
 
     setWishList(wishListBooks);
   }, []);
-    
+  
+  useEffect( () => {
+    const readList = getStoredReadList();
+    const readlistId = readList.map(book => parseInt(book));
+    const readlistBooks = allBooks.filter((book) => readlistId.includes(book.bookId))
+
+    setReadList(readlistBooks);
+  } ,[])
+
+
+
+
+
   return (
     <div>
       <Tabs>
@@ -37,7 +53,11 @@ const Dashboard = () => {
           </div>
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+          <div>
+              {
+                readList.map((book, idx) => <ListedBook book={book} key={idx}></ListedBook> )
+              }
+          </div>
         </TabPanel>
       </Tabs>
     </div>
