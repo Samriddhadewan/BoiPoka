@@ -15,20 +15,24 @@ const Dashboard = () => {
     const wishList = getStoredWishList();
     const wishListId = wishList.map((book) => parseInt(book));
 
-    const wishListBooks = allBooks.filter((book) =>
-      wishListId.includes(book.bookId)
-    );
+ 
+
+    const wishListBooks = allBooks.filter(book =>
+      wishListId.includes(book.bookId));
+
+
+      
 
     setWishList(wishListBooks);
-  }, []);
+  }, [allBooks]);
   
   useEffect( () => {
     const readList = getStoredReadList();
     const readlistId = readList.map(book => parseInt(book));
-    const readlistBooks = allBooks.filter((book) => readlistId.includes(book.bookId))
+    const readlistBooks = allBooks.filter(book => readlistId.includes(book.bookId))
 
     setReadList(readlistBooks);
-  } ,[])
+  } ,[allBooks])
 
 
 
